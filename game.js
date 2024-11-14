@@ -5,8 +5,137 @@ function setup() {
   createCanvas(800, 600);
 }
 
+function character(x, y) {
+  //umbrella body
+  push();
+  fill(255, 255, 0);
+  arc(x, y, 162, 145, PI, 0);
+  pop();
+
+  //umbrella arcs
+  push();
+  noFill();
+  arc(x - 66.5, y, 27, 15, PI, 0);
+  arc(x - 39.5, y, 27, 15, PI, 0);
+  arc(x - 12.5, y, 27, 15, PI, 0);
+  arc(x + 14.5, y, 27, 15, PI, 0);
+  arc(x + 41.5, y, 27, 15, PI, 0);
+  arc(x + 68, y, 27, 15, PI, 0);
+  pop();
+  //arms
+  push();
+  strokeWeight(10);
+  line(x - 15, y + 65, x, y + 90);
+  strokeWeight(10);
+  line(x - 65, y + 65, x - 80, y + 90);
+  pop();
+
+  //hands
+  push();
+  fill(240, 240, 215);
+  ellipse(x - 80, y + 92, 10, 10);
+  ellipse(x, y + 92, 10, 10);
+  pop();
+
+  //handle
+  push();
+  noFill();
+  strokeWeight(4);
+  line(x, y - 1, x, y + 90);
+  arc(x + 10, y + 90, 20, 20, 0, PI);
+  pop();
+
+  //top of the umbrella
+  push();
+  fill(0, 0, 0);
+  arc(x, y - 72, 10, 10, PI, 0);
+  pop();
+
+  // details
+  beginShape();
+  noFill();
+  vertex(x - 53, y - 4);
+  bezierVertex(x - 44, y - 72, x - 11, y - 63, x, y - 78);
+  endShape();
+  beginShape();
+  noFill();
+  vertex(x + 55, y - 4);
+  bezierVertex(x + 44, y - 72, x + 11, y - 63, x, y - 78);
+  endShape();
+  line(x + 1, y - 77, x + 1, y - 3);
+  beginShape();
+  noFill();
+  vertex(x + 28, y - 3);
+  bezierVertex(x + 20, y - 72, x + 5, y - 63, x, y - 78);
+  endShape();
+  beginShape();
+  noFill();
+  vertex(x - 26, y - 3);
+  bezierVertex(x - 20, y - 72, x - 5, y - 63, x, y - 78);
+  endShape();
+
+  //head
+  push();
+  fill(240, 240, 215);
+  ellipse(x - 40, y + 34, 50, 50);
+  pop();
+
+  //body
+  push();
+  fill(50, 50, 50);
+  rect(x - 65, y + 60, 50, 40);
+  pop();
+  push();
+  fill(111, 143, 200);
+  rect(x - 65, y + 100, 50, 20);
+  pop();
+  line(x - 40, y + 100, x - 40, y + 120);
+  push();
+  fill(200, 200, 200);
+  ellipse(x - 55, y + 122, 30, 10);
+  ellipse(x - 25, y + 122, 30, 10);
+  pop();
+
+  //eyes
+  fill(0, 0, 0);
+  ellipse(x - 50, y + 32, 5, 5);
+  ellipse(x - 30, y + 32, 5, 5);
+
+  //mouth
+  arc(x - 40, y + 45, 10, 10, 0, PI);
+
+  //hair
+  hair(x, y);
+  hair(x - 20, y - 2);
+  hair(x - 10, y - 1);
+  push();
+
+  translate(x + 10, y + 20);
+  rotate(0.5);
+  hair(0, 0);
+  pop();
+
+  push();
+  translate(x - 40, y - 10);
+  rotate(-0.5);
+  hair(0, 0);
+  pop();
+  push();
+  translate(x - 46, y - 4);
+  rotate(-0.5);
+  hair(0, 0);
+  pop();
+}
+function hair(x, y) {
+  beginShape();
+  vertex(x - 26, y + 1);
+  bezierVertex(x - 43, y + 29, x - 9, y + 28, x - 26, y);
+  endShape();
+}
+
 function draw() {
   background(25, 14, 20);
+  push();
   noStroke();
 
   // rooftop
@@ -99,4 +228,6 @@ function draw() {
   fill(100, 100, 100);
   triangle(x - 200, y + 159, x - 160, y + 150, x - 200, y + 370);
   triangle(x + 384, y + 150, x + 340, y + 150, x + 385, y + 370);
+  pop();
+  character(x + 50, y + 160);
 }
