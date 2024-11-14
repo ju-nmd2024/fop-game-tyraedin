@@ -230,4 +230,11 @@ function draw() {
   triangle(x + 384, y + 150, x + 340, y + 150, x + 385, y + 370);
   pop();
   character(x + 50, y + 160);
+  speed(5);
+  y = y + speed;
+  if (y <= 100) {
+    speed = -2;
+  } else if (y === 350) {
+    speed = 0;
+  }
 }
