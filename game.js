@@ -125,6 +125,14 @@ function character(x, y) {
   rotate(-0.5);
   hair(0, 0);
   pop();
+
+  let speed = 2;
+  y = y + speed;
+  if (y <= 100) {
+    speed = -2;
+  } else if (y === 350) {
+    speed = 0;
+  }
 }
 function hair(x, y) {
   beginShape();
@@ -229,12 +237,7 @@ function draw() {
   triangle(x - 200, y + 159, x - 160, y + 150, x - 200, y + 370);
   triangle(x + 384, y + 150, x + 340, y + 150, x + 385, y + 370);
   pop();
+
+  //ted
   character(x + 50, y + 160);
-  speed(5);
-  y = y + speed;
-  if (y <= 100) {
-    speed = -2;
-  } else if (y === 350) {
-    speed = 0;
-  }
 }
