@@ -1,9 +1,24 @@
 x = 200;
 y = 200;
 
+//* Code taken from Garrits video "Create a night sky"* //
+let starx = [];
+let stary = [];
+let starAlpha = [];
+
+for (let i = 0; i < 400; i++) {
+  const x = Math.floor(Math.random() * width);
+  const y = Math.floor(Math.random() * height);
+  const alpha = Math.random();
+
+  starx.push(x);
+  stary.push(y);
+  starAlpha.push(alpha);
+  console.log(starx);
+}
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(585, 600);
 }
 
 function character(x, y) {
@@ -147,6 +162,11 @@ function draw() {
   push();
   noStroke();
 
+  for (let index in starx) {
+    fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+    ellipse(starx[index], stary[index], 3);
+    starAlpha[index] = starAlpha[index] + 0.05;
+  }
   // rooftop
   fill(200, 200, 200);
   rect(x - 200, y + 200, 600, 200);
