@@ -116,12 +116,17 @@ function gameScreen() {
   //skyscraper 7
   fill(30, 50, 80);
   rect(x + 260, y - 80, 100, 230);
+  fill(150, 150, 150);
+  arc(x + 310, y - 80, 100, 70, PI, 0);
   push();
-  fill(150,150,150);
-  arc(x+310,y-80,100,70,PI,0);
+  stroke(150, 150, 150);
+  strokeWeight(5);
+  line(x + 305, y - 140, x + 305, y - 100);
+  fill(150, 150, 150);
+  ellipse(x + 305, y - 130, 20, 1);
+  ellipse(x + 305, y - 122, 20, 1);
+  pop();
 
-  line(x+305,y-170,x+305,y-20;
-pop();
   //skyscraper 6
   fill(60, 18, 80);
   rect(x + 180, y + 40, 100, 110);
