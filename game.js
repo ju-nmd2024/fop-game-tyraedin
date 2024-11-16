@@ -289,12 +289,13 @@ function character(x, y) {
   pop();
 
   let speed = 2;
-  y = y + speed;
+y = y + speed;
   if (y <= 100) {
     speed = -2;
   } else if (y === 350) {
     speed = 0;
   }
+
 }
 function hair(x, y) {
   beginShape();
@@ -312,6 +313,7 @@ function draw() {
     }else if (state === "result") {
     resultScreen();
   }
+  character(x,y);
 }
 
 function mouseClicked() {
