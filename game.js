@@ -2,7 +2,6 @@ x = 200;
 y = 200;
 
 let state = "start";
-let speed = 2;
 function startScreen() {
   background(0, 0, 0);
   text("start", 200, 200);
@@ -286,6 +285,10 @@ function character() {
   rotate(-0.5);
   hair(0, 0);
   pop();
+
+  let speed = 2;
+
+
 }
 function hair(x, y) {
   beginShape();
@@ -294,17 +297,6 @@ function hair(x, y) {
   endShape();
 }
 
-function draw() {
-  background(100, 200, 255);
-  character();
-
-  y = y + speed;
-  if (y <= 100) {
-    speed = -2;
-  } else if (y === 350) {
-    speed = 0;
-  }
-}
 
 function draw() {
   if (state === "start") {
