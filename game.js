@@ -2,7 +2,7 @@ x = 200;
 y = 200;
 
 let state = "start";
-
+let speed = 2;
 function startScreen() {
   background(0, 0, 0);
   text("start", 200, 200);
@@ -167,7 +167,7 @@ function setup() {
   createCanvas(550, 600);
 }
 
-function character(x, y) {
+function character() {
   //umbrella body
   push();
   fill(255, 255, 0);
@@ -175,15 +175,14 @@ function character(x, y) {
   pop();
 
   //umbrella arcs
-  push();
-  noFill();
+  fill(100, 200, 255);
   arc(x - 66.5, y, 27, 15, PI, 0);
   arc(x - 39.5, y, 27, 15, PI, 0);
   arc(x - 12.5, y, 27, 15, PI, 0);
   arc(x + 14.5, y, 27, 15, PI, 0);
   arc(x + 41.5, y, 27, 15, PI, 0);
   arc(x + 68, y, 27, 15, PI, 0);
-  pop();
+
   //arms
   push();
   strokeWeight(10);
@@ -287,15 +286,6 @@ function character(x, y) {
   rotate(-0.5);
   hair(0, 0);
   pop();
-
-  let speed = 2;
-y = y + speed;
-  if (y <= 100) {
-    speed = -2;
-  } else if (y === 350) {
-    speed = 0;
-  }
-
 }
 function hair(x, y) {
   beginShape();
@@ -305,15 +295,27 @@ function hair(x, y) {
 }
 
 function draw() {
+  background(100, 200, 255);
+  character();
+
+  y = y + speed;
+  if (y <= 100) {
+    speed = -2;
+  } else if (y === 350) {
+    speed = 0;
+  }
+}
+
+function draw() {
   if (state === "start") {
     startScreen();
   } else if (state === "game") {
     gameScreen();
     //  state = "result";
-    }else if (state === "result") {
+  } else if (state === "result") {
     resultScreen();
   }
-  character(x,y);
+  character(x, y);
 }
 
 function mouseClicked() {
@@ -325,4 +327,3 @@ function mouseClicked() {
     state = "game";
   }
 }
-
