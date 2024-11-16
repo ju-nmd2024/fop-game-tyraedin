@@ -2,7 +2,6 @@ x = 200;
 y = 200;
 
 let state = "start";
-let gameTimer = 0;
 
 function startScreen() {
   background(0, 0, 0);
@@ -146,7 +145,9 @@ function gameScreen() {
 
   character(x + 70, y + 170);
 }
+
 //* Code taken from Garrits video "Create a night sky"* //
+
 let starx = [];
 let stary = [];
 let starAlpha = [];
@@ -301,12 +302,16 @@ function hair(x, y) {
   bezierVertex(x - 43, y + 29, x - 9, y + 28, x - 26, y);
   endShape();
 }
-gameScreen(x, y);
-character(x + 70, y + 170);
 
 function draw() {
-  gameScreen(x, y);
-  character(x + 70, y + 170);
+  if (state === "start") {
+    startScreen();
+  } else if (state === "game") {
+    gameScreen();
+    //  state = "result";
+    }else if (state === "result") {
+    resultScreen();
+  }
 }
 
 function mouseClicked() {
@@ -319,15 +324,3 @@ function mouseClicked() {
   }
 }
 
-if (state === "start") {
-  startScreen();
-} else if (state === "game") {
-  gameScreen();
-  gameTimer = gameTimer + 1;
-  if (gameTimer >= 100) {
-    gameTimer = 0;
-    state = "result";
-  }
-} else if (state === "result") {
-  resultScreen();
-}
