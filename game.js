@@ -142,7 +142,6 @@ function gameScreen() {
 
   pop();
 
-  character(x + 70, y + 170);
 }
 
 //* Code taken from Garrits video "Create a night sky"* //
@@ -167,6 +166,7 @@ function setup() {
 }
 
 function character() {
+  
   //umbrella body
   push();
   fill(255, 255, 0);
@@ -287,8 +287,12 @@ function character() {
   pop();
 
   let speed = 2;
-
-
+  y = y + speed;
+  if (y <= 100) {
+    speed = -2;
+  } else if (y === 350) {
+    speed = 0;
+  }
 }
 function hair(x, y) {
   beginShape();
