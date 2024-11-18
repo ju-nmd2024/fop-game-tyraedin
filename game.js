@@ -3,7 +3,9 @@ y = 200;
 
 let characterx= 200;
 let charactery = 200;
+
 let state = "start";
+
 function startScreen() {
   background(0, 0, 0);
   text("start", 200, 200);
@@ -276,7 +278,6 @@ function character(x,y) {
   rotate(0.5);
   hair(0, 0);
   pop();
-pop();
   push();
   translate(characterx - 46, charactery - 4);
   rotate(-0.5);
@@ -287,10 +288,16 @@ pop();
   charactery = charactery + speed;
   if (charactery <= 100) {
     speed = -2;
-  } else if (charactery === 200) {
+  } else if (charactery === 355) {
     speed = 0;
   }
-}
+
+  if (keyIsDown(32)){
+    speed=5;
+  }else {
+    speed=0;           
+}                    
+}  
 function hair(characterx, charactery) {
   beginShape();
   vertex(characterx - 26, charactery + 1);
@@ -300,7 +307,7 @@ function hair(characterx, charactery) {
   push();
   translate(characterx - 40, charactery - 10);
   rotate(-0.5);
-  hair(0, 0);
+  hair(0, 0);         
  
 
 
