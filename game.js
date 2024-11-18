@@ -347,7 +347,9 @@ function draw() {
 }else if (state === "replay") {
   replayScreen();
 } 
-  function mouseClicked() {
+}
+}
+function mouseClicked() {
   if (state === "start") {
     state = "game";
   } else if (state === "game") {
@@ -355,6 +357,3 @@ function draw() {
   } else if (state === "result") {
     state = "game";
   }
-}
-}
-}
