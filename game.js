@@ -3,8 +3,11 @@ y = 200;
 
 let characterx= 200;
 let charactery = 200;
-
 let state = "start";
+
+let velocityY=1;
+let acceleration=1;
+
 
 function startScreen() {
   background(0, 0, 0);
@@ -292,12 +295,9 @@ function character(x,y) {
     speed = 0;
   }
 
-  if (keyIsDown(32)){
-    speed=5;
-  }else {
-    speed=0;           
+         
 }                    
-}  
+ 
 function hair(characterx, charactery) {
   beginShape();
   vertex(characterx - 26, charactery + 1);
@@ -316,14 +316,38 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     gameScreen();
-    //  state = "result";
-  } else if (state === "result") {
-    resultScreen();
+
+    // fallling
+
+    if (charactery >= 1210) {
+      if (velocityY <= 5){
+        state = "won";
+        characterState = "happy";   
+    }   else if (velocityY > 5) {
+    state = "lost";
+    characterState = "sad"; 
   }
   character(characterx, charactery);
-}
 
-function mouseClicked() {
+  //gravity logic 
+  charactery=charactery + velocityY;
+  velocityY = velocityY + acceleration;
+
+
+  // controls the character
+  if (keyIsDown(32) === true) {
+    acceleration = 1;
+    }else {
+      acceleration=0.5;
+      }
+}else if (state === "won"){
+  wonScreen();
+}else if (state === "lost") {
+  lostScreen();
+}else if (state === "replay") {
+  replayScreen();
+} 
+  function mouseClicked() {
   if (state === "start") {
     state = "game";
   } else if (state === "game") {
@@ -331,4 +355,6 @@ function mouseClicked() {
   } else if (state === "result") {
     state = "game";
   }
+}
+}
 }
