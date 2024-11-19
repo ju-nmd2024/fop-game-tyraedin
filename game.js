@@ -13,10 +13,29 @@ function startScreen() {
   background(0, 0, 0);
   text("start", 200, 200);
 }
-function resultScreen() {
-  background(0, 0, 0);
-  text("result", 200, 200);
+function lostScreen() {
+  background(100, 100, 100);
+  text("lost", 200, 200);
 }
+  function wonScreen(){
+background(200,200,200);
+text("you won");
+}
+
+function resetGame() {
+characterx = 200;
+charactery = -200;
+velocityY= 1;
+acceleration= 1;
+}
+
+function replayScreen() {
+    characterx = 200;
+    charactery = -200;
+    velocityY= 1;
+    acceleration= 1;
+    }
+
 function gameScreen() {
   background(25, 14, 20);
   push();
@@ -290,12 +309,10 @@ function character(x,y) {
   let speed = 2;
   charactery = charactery + speed;
   if (charactery <= 100) {
-    speed = -2;
+    speed = 2;
   } else if (charactery === 355) {
     speed = 0;
-  }
-
-         
+  }   
 }                    
  
 function hair(characterx, charactery) {
@@ -303,13 +320,12 @@ function hair(characterx, charactery) {
   vertex(characterx - 26, charactery + 1);
   bezierVertex(characterx - 43, charactery + 29, characterx - 9, charactery + 28, characterx - 26, charactery);
   endShape();
-}
   push();
   translate(characterx - 40, charactery - 10);
   rotate(-0.5);
   hair(0, 0);         
  
-
+}
 
 function draw() {
   if (state === "start") {
@@ -318,16 +334,13 @@ function draw() {
     gameScreen();
 
     // fallling
-
-    if (charactery >= 1210) {
+ if (charactery >= 100) {
       if (velocityY <= 5){
-        state = "won";
-        characterState = "happy";   
+        state = "won";   
     }   else if (velocityY > 5) {
-    state = "lost";
-    characterState = "sad"; 
+    state = "lost"; 
   }
-  character(characterx, charactery);
+ 
 
   //gravity logic 
   charactery=charactery + velocityY;
@@ -340,20 +353,24 @@ function draw() {
     }else {
       acceleration=0.5;
       }
+
 }else if (state === "won"){
   wonScreen();
 }else if (state === "lost") {
   lostScreen();
-}else if (state === "replay") {
+}else if (state === "replay"){ 
   replayScreen();
 } 
-}
+} 
 }
 function mouseClicked() {
   if (state === "start") {
     state = "game";
-  } else if (state === "game") {
-    state = "result";
-  } else if (state === "result") {
-    state = "game";
+  } else if (state === "won") {
+    resetGame();
+    state = "start";
+  } else if (state === "lost") {
+    replayScreen();
+
   }
+}
