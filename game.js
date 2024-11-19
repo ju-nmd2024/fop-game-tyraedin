@@ -6,24 +6,31 @@ let state = "start";
 let velocityY = 0.2;
 let acceleration = 0.2;
 
-function setup() {
+function setup() { 
   createCanvas(550, 600);
   background(255, 255, 255);
 }
 
 function startScreen() {
-  background(0, 0, 0);
-  text("start", 200, 200);
+  background(255, 100, 100);
+  textSize(50);
+  text(" KLICK TO START", 70, 200);   
 }
 
 function lostScreen() { 
   background(100, 100, 100);
-  text("lost", 200, 200);
+  textSize(50);
+  text("YOU LOST", 150, 220);
+textSize(30);
+  text("(KLICK TO TRY AGAIN)", 120,300);
 }
 
 function wonScreen() {
-  background(200, 200, 200);
-  text("you won");
+  background(200, 2, 100);
+  textSize(50);
+  text("YOU WON",150,220);
+  textSize(30);
+  text("(KLICK TO PLAY AGAIN)",100,250);
 }
 
 function resetGame() {
@@ -33,24 +40,19 @@ function resetGame() {
   acceleration = 0.2;
 }
 
-// function replayScreen() {
-//   characterx = 200;
-//   charactery = -200;
-//   velocityY = 1;
-//   acceleration = 1;
-// }
+
 
 function gameScreen() {
   background(25, 14, 20);
   push();
   noStroke();
+  
+  let starx = [];
+  let stary = [];
+  let starAlpha = [];
 
-  //let starx = [];
-  //let stary = [];
-  //let starAlpha = [];
-
-  //for (let i = 0; i < 400; i++) {
-  /*
+  for (let i = 0; i < 100; i++) {
+  
   const x = Math.floor(Math.random() * width);
     const y = Math.floor(Math.random() * height);
     const alpha = Math.random();
@@ -58,7 +60,7 @@ function gameScreen() {
     starx.push(x);
     stary.push(y);
     starAlpha.push(alpha);
-    //console.log(starx);
+    
   }
 
   for (let index in starx) {
@@ -66,7 +68,7 @@ function gameScreen() {
     ellipse(starx[index], stary[index], 3);
     starAlpha[index] = starAlpha[index] + 0.05;
   }
-    */
+ 
 
   // rooftop
   fill(200, 200, 200);
@@ -204,10 +206,7 @@ function gameScreen() {
   charactery = charactery + velocityY;
   velocityY = velocityY + acceleration;
 
-  // gravity logic
-  // charactery = charactery + velocityY;
-  // velocityY = velocityY + acceleration;
-
+ 
   // controls the character
   if (keyIsDown(32) === true) {
     velocityY -= 0.5;
@@ -395,7 +394,7 @@ function mouseClicked() {
     state = "game";
   } else if ((state === "lost")) {
     state = "game";
-  } else if ((state === "win")) {
-    state = game;
+  } else if ((state === "won")) {
+    state = "game";
   }
 }
