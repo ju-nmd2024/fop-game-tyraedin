@@ -1,51 +1,73 @@
-x = 200;
-y = 200;
-
-let characterx= 200;
-let charactery = 200;
+let x = 200;
+let y = 200;
+let characterx = 200;
+let charactery = 100;
 let state = "start";
+let velocityY = 0.2;
+let acceleration = 0.2;
 
-let velocityY=1;
-let acceleration=1;
-
+function setup() {
+  createCanvas(550, 600);
+  background(255, 255, 255);
+}
 
 function startScreen() {
   background(0, 0, 0);
   text("start", 200, 200);
 }
-function lostScreen() {
+
+function lostScreen() { 
   background(100, 100, 100);
   text("lost", 200, 200);
 }
-  function wonScreen(){
-background(200,200,200);
-text("you won");
+
+function wonScreen() {
+  background(200, 200, 200);
+  text("you won");
 }
 
 function resetGame() {
-characterx = 200;
-charactery = -200;
-velocityY= 1;
-acceleration= 1;
+  characterx = 200;
+  charactery = 100;
+  velocityY = 0.2;
+  acceleration = 0.2;
 }
 
-function replayScreen() {
-    characterx = 200;
-    charactery = -200;
-    velocityY= 1;
-    acceleration= 1;
-    }
+// function replayScreen() {
+//   characterx = 200;
+//   charactery = -200;
+//   velocityY = 1;
+//   acceleration = 1;
+// }
 
 function gameScreen() {
   background(25, 14, 20);
   push();
   noStroke();
 
+  //let starx = [];
+  //let stary = [];
+  //let starAlpha = [];
+
+  //for (let i = 0; i < 400; i++) {
+  /*
+  const x = Math.floor(Math.random() * width);
+    const y = Math.floor(Math.random() * height);
+    const alpha = Math.random();
+
+    starx.push(x);
+    stary.push(y);
+    starAlpha.push(alpha);
+    //console.log(starx);
+  }
+
   for (let index in starx) {
     fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
     ellipse(starx[index], stary[index], 3);
     starAlpha[index] = starAlpha[index] + 0.05;
   }
+    */
+
   // rooftop
   fill(200, 200, 200);
   rect(x - 200, y + 200, 600, 200);
@@ -149,7 +171,7 @@ function gameScreen() {
   fill(150, 150, 150);
   ellipse(x + 305, y - 130, 20, 1);
   ellipse(x + 305, y - 122, 20, 1);
-  pop();
+  pop(); 
 
   //skyscraper 6
   fill(60, 18, 80);
@@ -165,34 +187,36 @@ function gameScreen() {
   rect(x + 240, y + 120, 20, 10);
   rect(x + 200, y + 140, 20, 10);
   rect(x + 240, y + 140, 20, 10);
-
   pop();
 
+  // fallling
+  if (charactery >= 450) {
+    if (velocityY <= 5) {
+      state = "won";
+    } else if (velocityY > 5) {
+      state = "lost";
+    }
+  }
+  //console.log(characterx, charactery);
+  character(characterx, charactery);
+  hair(characterx, charactery);
+
+  charactery = charactery + velocityY;
+  velocityY = velocityY + acceleration;
+
+  // gravity logic
+  // charactery = charactery + velocityY;
+  // velocityY = velocityY + acceleration;
+
+  // controls the character
+  if (keyIsDown(32) === true) {
+    velocityY -= 0.5;
+  }
 }
 
 //* Code taken from Garrits video "Create a night sky"* //
 
-let starx = [];
-let stary = [];
-let starAlpha = [];
-
-for (let i = 0; i < 400; i++) {
-  const x = Math.floor(Math.random() * width);
-  const y = Math.floor(Math.random() * height);
-  const alpha = Math.random();
-
-  starx.push(x);
-  stary.push(y);
-  starAlpha.push(alpha);
-  console.log(starx);
-}
-
-function setup() {
-  createCanvas(550, 600);
-}
-
-function character(x,y) {
-  
+function character(characterx, charactery) {
   //umbrella body
   push();
   fill(255, 255, 0);
@@ -241,23 +265,51 @@ function character(x,y) {
   beginShape();
   noFill();
   vertex(characterx - 53, charactery - 4);
-  bezierVertex(characterx - 44, charactery - 72, characterx - 11, charactery - 63, characterx, charactery - 78);
+  bezierVertex(
+    characterx - 44,
+    charactery - 72,
+    characterx - 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
   endShape();
   beginShape();
   noFill();
   vertex(characterx + 55, charactery - 4);
-  bezierVertex(characterx + 44, charactery - 72, characterx + 11, charactery - 63, characterx, charactery - 78);
+  bezierVertex(
+    characterx + 44,
+    charactery - 72,
+    characterx + 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
   endShape();
   line(characterx + 1, charactery - 77, characterx + 1, charactery - 3);
   beginShape();
   noFill();
   vertex(characterx + 28, charactery - 3);
-  bezierVertex(characterx + 20, charactery - 72, characterx + 5, charactery - 63, characterx, charactery - 78);
+  bezierVertex(
+    characterx + 20,
+    charactery - 72,
+    characterx + 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
   endShape();
   beginShape();
   noFill();
   vertex(characterx - 26, charactery - 3);
-  bezierVertex(characterx - 20, charactery - 72, characterx - 5, charactery - 63, characterx, charactery - 78);
+  bezierVertex(
+    characterx - 20,
+    charactery - 72,
+    characterx - 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
   endShape();
 
   //head
@@ -305,26 +357,23 @@ function character(x,y) {
   rotate(-0.5);
   hair(0, 0);
   pop();
+}
 
-  let speed = 2;
-  charactery = charactery + speed;
-  if (charactery <= 100) {
-    speed = 2;
-  } else if (charactery === 355) {
-    speed = 0;
-  }   
-}                    
- 
 function hair(characterx, charactery) {
   beginShape();
   vertex(characterx - 26, charactery + 1);
-  bezierVertex(characterx - 43, charactery + 29, characterx - 9, charactery + 28, characterx - 26, charactery);
+  bezierVertex(
+    characterx - 43,
+    charactery + 29,
+    characterx - 9,
+    charactery + 28,
+    characterx - 26,
+    charactery
+  );
   endShape();
   push();
   translate(characterx - 40, charactery - 10);
   rotate(-0.5);
-  hair(0, 0);         
- 
 }
 
 function draw() {
@@ -332,45 +381,21 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     gameScreen();
-
-    // fallling
- if (charactery >= 100) {
-      if (velocityY <= 5){
-        state = "won";   
-    }   else if (velocityY > 5) {
-    state = "lost"; 
+  } else if (state === "won") {
+    wonScreen();
+    resetGame();
+  } else if (state === "lost") {
+    lostScreen();
+    resetGame();
   }
- 
-
-  //gravity logic 
-  charactery=charactery + velocityY;
-  velocityY = velocityY + acceleration;
-
-
-  // controls the character
-  if (keyIsDown(32) === true) {
-    acceleration = 1;
-    }else {
-      acceleration=0.5;
-      }
-
-}else if (state === "won"){
-  wonScreen();
-}else if (state === "lost") {
-  lostScreen();
-}else if (state === "replay"){ 
-  replayScreen();
-} 
-} 
 }
+
 function mouseClicked() {
   if (state === "start") {
     state = "game";
-  } else if (state === "won") {
-    resetGame();
-    state = "start";
-  } else if (state === "lost") {
-    replayScreen();
-
+  } else if ((state === "lost")) {
+    state = "game";
+  } else if ((state === "win")) {
+    state = game;
   }
 }
