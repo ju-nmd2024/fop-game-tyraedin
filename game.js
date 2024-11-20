@@ -4,17 +4,21 @@ let characterx = 300;
 let charactery = 200;
 let state = "start";
 let velocityY = 0.2;
-let acceleration = 0.2;
+let acceleration = 0.2; 
 
 function setup() {
   createCanvas(550, 600);
   background(255, 255, 255);
 }
-
-function startScreen() {
-  background(255, 100, 100);
-  textSize(50);
-  text(" KLICK TO START", 70, 200);
+function startScreen() {  
+  background(255, 100, 100); 
+  characterStart(x+100,y+200);
+  textSize(50);    
+  text(" HEY THERE!", 120, 200); 
+  textSize(30);
+  text("WOULD YOU HELP ME LAND?",70,250);
+  textSize(20);
+  text("(KLICK TO BEGIN)",200,285);
 }
 
 function lostScreen() {
@@ -28,6 +32,7 @@ function lostScreen() {
 
 function wonScreen() {
   background(200, 2, 100);
+  characterHappy(x+100,y+200);
   textSize(50);
   text("YOU WON", 150, 220);
   textSize(30);
@@ -476,9 +481,301 @@ function characterSad(characterx, charactery) {
   fill(0, 0, 0);
   ellipse(characterx - 50, charactery + 32, 5, 5);
   ellipse(characterx - 30, charactery + 32, 5, 5);
+  push();
+  fill(200,250,255); 
+  hair(characterx, charactery+35  );
+  pop();
 
   //mouth
   arc(characterx - 40, charactery + 45, 10, 10, PI, 0);
+
+  //hair
+  hair(characterx, charactery); 
+  hair(characterx - 20, charactery - 2);
+  hair(characterx - 10, charactery - 1);
+  hair(characterx - 30, charactery);
+  push();
+
+  translate(characterx + 10, charactery + 20);
+  rotate(0.5);
+  hair(0, 0);
+  pop();
+  push();
+  translate(characterx - 46, charactery - 4);
+  rotate(-0.5);
+  hair(0, 0);
+  pop();
+}
+
+function characterHappy(characterx, charactery) {
+  //umbrella body
+  push();
+  fill(255, 255, 100);
+  arc(characterx, charactery, 162, 145, PI, 0);
+  pop();
+
+  //umbrella arcs
+  fill(255, 255, 0);
+  arc(characterx - 66.5, charactery, 27, 15, PI, 0);
+  arc(characterx - 39.5, charactery, 27, 15, PI, 0);
+  arc(characterx - 12.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 14.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 41.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 68, charactery, 27, 15, PI, 0);
+
+  //arms
+  push();
+  strokeWeight(10);
+  line(characterx - 15, charactery + 65, characterx, charactery + 90);
+  strokeWeight(10);
+  line(characterx - 65, charactery + 65, characterx - 80, charactery + 90);
+  pop();
+
+  //hands
+  push();
+  fill(240, 240, 215);
+  ellipse(characterx - 80, charactery + 92, 10, 10);
+  ellipse(characterx, charactery + 92, 10, 10);
+  pop();
+
+  //handle
+  push();
+  noFill();
+  strokeWeight(4);
+  line(characterx, charactery - 1, characterx, charactery + 90);
+  arc(characterx + 10, charactery + 90, 20, 20, 0, PI);
+  pop();
+
+  //top of the umbrella
+  push();
+  fill(0, 0, 0);
+  arc(characterx, charactery - 72, 10, 10, PI, 0);
+  pop();
+
+  // details
+  beginShape();
+  noFill();
+  vertex(characterx - 53, charactery - 4);
+  bezierVertex(
+    characterx - 44,
+    charactery - 72,
+    characterx - 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  beginShape();
+  noFill();
+  vertex(characterx + 55, charactery - 4);
+  bezierVertex(
+    characterx + 44,
+    charactery - 72,
+    characterx + 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  line(characterx + 1, charactery - 77, characterx + 1, charactery - 3);
+  beginShape();
+  noFill();
+  vertex(characterx + 28, charactery - 3);
+  bezierVertex(
+    characterx + 20,
+    charactery - 72,
+    characterx + 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  beginShape();
+  noFill();
+  vertex(characterx - 26, charactery - 3);
+  bezierVertex(
+    characterx - 20,
+    charactery - 72,
+    characterx - 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+
+  //head
+  push();
+  fill(240, 240, 215);
+  ellipse(characterx - 40, charactery + 34, 50, 50);
+  pop();
+
+  //body
+  push();
+  fill(50, 50, 50);
+  rect(characterx - 65, charactery + 60, 50, 40);
+  pop();
+  push();
+  fill(111, 143, 200);
+  rect(characterx - 65, charactery + 100, 50, 20);
+  pop();
+  line(characterx - 40, charactery + 100, characterx - 40, charactery + 120);
+  push();
+  fill(200, 200, 200);
+  ellipse(characterx - 55, charactery + 122, 30, 10);
+  ellipse(characterx - 25, charactery + 122, 30, 10);
+  pop();
+
+  //eyes
+  fill(0, 0, 0);
+  ellipse(characterx - 50, charactery + 32, 7, 2);
+  ellipse(characterx - 30, charactery + 32, 7, 2);
+  
+
+  //mouth
+  arc(characterx - 40, charactery + 45, 20, 20, 0, PI);
+
+  //hair
+  hair(characterx, charactery);
+  hair(characterx - 20, charactery - 2);
+  hair(characterx - 10, charactery - 1);
+  hair(characterx - 30, charactery);
+  push();
+
+  translate(characterx + 10, charactery + 20);
+  rotate(0.5);
+  hair(0, 0);
+  pop();
+  push();
+  translate(characterx - 46, charactery - 4);
+  rotate(-0.5);
+  hair(0, 0);
+  pop();
+}
+function characterStart(characterx, charactery) {
+  //umbrella body
+  push();
+  fill(255, 255, 100);
+  arc(characterx, charactery, 162, 145, PI, 0);
+  pop();
+
+  //umbrella arcs
+  fill(255, 255, 0);
+  arc(characterx - 66.5, charactery, 27, 15, PI, 0);
+  arc(characterx - 39.5, charactery, 27, 15, PI, 0);
+  arc(characterx - 12.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 14.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 41.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 68, charactery, 27, 15, PI, 0);
+
+  //arms
+  push();
+  strokeWeight(10);
+  line(characterx -15, charactery + 65, characterx, charactery + 90);
+  strokeWeight(10);
+  line(characterx - 65, charactery + 65, characterx - 80, charactery +40);
+  pop();
+
+  //hands
+  push();
+  fill(240, 240, 215);
+  ellipse(characterx - 80, charactery + 40, 10, 10);
+  ellipse(characterx, charactery + 92, 10, 10);
+  pop();
+
+  //handle
+  push();
+  noFill();
+  strokeWeight(4);
+  line(characterx, charactery - 1, characterx, charactery + 90);
+  arc(characterx + 10, charactery + 90, 20, 20, 0, PI);
+  pop();
+
+  //top of the umbrella
+  push();
+  fill(0, 0, 0);
+  arc(characterx, charactery - 72, 10, 10, PI, 0);
+  pop();
+
+  // details
+  beginShape();
+  noFill();
+  vertex(characterx - 53, charactery - 4);
+  bezierVertex(
+    characterx - 44,
+    charactery - 72,
+    characterx - 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  beginShape();
+  noFill();
+  vertex(characterx + 55, charactery - 4);
+  bezierVertex(
+    characterx + 44,
+    charactery - 72,
+    characterx + 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  line(characterx + 1, charactery - 77, characterx + 1, charactery - 3);
+  beginShape();
+  noFill();
+  vertex(characterx + 28, charactery - 3);
+  bezierVertex(
+    characterx + 20,
+    charactery - 72,
+    characterx + 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  beginShape();
+  noFill();
+  vertex(characterx - 26, charactery - 3);
+  bezierVertex(
+    characterx - 20,
+    charactery - 72,
+    characterx - 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+
+  //head
+  push();
+  fill(240, 240, 215);
+  ellipse(characterx - 40, charactery + 34, 50, 50);
+  pop();
+
+  //body
+  push();
+  fill(50, 50, 50);
+  rect(characterx - 65, charactery + 60, 50, 40);
+  pop();
+  push();
+  fill(111, 143, 200);
+  rect(characterx - 65, charactery + 100, 50, 20);
+  pop();
+  line(characterx -40, charactery + 100, characterx - 40, charactery + 120);
+  push();
+  fill(200, 200, 200);
+  ellipse(characterx - 55, charactery + 122, 30, 10);
+  ellipse(characterx - 25, charactery + 122, 30, 10);
+  pop();
+
+  //eyes
+  fill(0, 0, 0);
+  ellipse(characterx - 50, charactery + 32, 5, 5);
+  ellipse(characterx - 30, charactery + 32, 5, 5);
+
+  //mouth
+  arc(characterx - 40, charactery + 45, 10, 10, 0, PI);
 
   //hair
   hair(characterx, charactery);
