@@ -4,21 +4,21 @@ let characterx = 300;
 let charactery = 200;
 let state = "start";
 let velocityY = 0.2;
-let acceleration = 0.2; 
+let acceleration = 0.2;
 
 function setup() {
   createCanvas(550, 600);
   background(255, 255, 255);
 }
-function startScreen() {  
-  background(255, 100, 100); 
-  characterStart(x+100,y+200);
-  textSize(50);    
-  text(" HEY THERE!", 120, 200); 
+function startScreen() {
+  background(255, 100, 100);
+  characterStart(x + 100, y + 200);
+  textSize(50);
+  text(" HEY THERE!", 120, 200);
   textSize(30);
-  text("WOULD YOU HELP ME LAND?",70,250);
+  text("WOULD YOU HELP ME LAND?", 70, 250);
   textSize(20);
-  text("(KLICK TO BEGIN)",200,285);
+  text("(CLICK TO BEGIN)", 200, 285);
 }
 
 function lostScreen() {
@@ -27,18 +27,18 @@ function lostScreen() {
   textSize(50);
   text("YOU LOST", 150, 220);
   textSize(30);
-  text("(KLICK TO TRY AGAIN)", 120, 250);
+  text("(CLICK TO TRY AGAIN)", 120, 250);
 }
 
 function wonScreen() {
   background(200, 2, 100);
-  characterHappy(x+100,y+200);
+  characterHappy(x + 100, y + 200);
   textSize(50);
   text("YOU WON", 150, 220);
   textSize(30);
-  text("(KLICK TO PLAY AGAIN)", 100, 250);
+  text("(CLICK TO PLAY AGAIN)", 100, 250);
 }
-
+//got help from student Hedda Petersson with the reset game
 function resetGame() {
   characterx = 300;
   charactery = 100;
@@ -50,7 +50,7 @@ function gameScreen() {
   background(25, 14, 20);
   push();
   noStroke();
-
+  //taken from Garrits video "A Night Sky"
   let starx = [];
   let stary = [];
   let starAlpha = [];
@@ -193,27 +193,26 @@ function gameScreen() {
   pop();
 
   // fallling
-  if (charactery >= 450) {
-    if (velocityY <= 5) {
+  if (charactery >= 400) {
+    if (velocityY <= 4) {
       state = "won";
-    } else if (velocityY > 5) {
+    } else if (velocityY > 4) {
       state = "lost";
     }
   }
-  //console.log(characterx, charactery);
-  character(characterx, charactery);
-  hair(characterx, charactery);
 
+  //The logic
   charactery = charactery + velocityY;
   velocityY = velocityY + acceleration;
 
-  // controls the character
+  // controls the character when falling
   if (keyIsDown(32) === true) {
     velocityY -= 0.5;
   }
+  character(characterx, charactery);
 }
 
-//* Code taken from Garrits video "Create a night sky"* //
+//* Code taken from Garrits video "night sky"* //
 
 function character(characterx, charactery) {
   //umbrella body
@@ -482,15 +481,15 @@ function characterSad(characterx, charactery) {
   ellipse(characterx - 50, charactery + 32, 5, 5);
   ellipse(characterx - 30, charactery + 32, 5, 5);
   push();
-  fill(200,250,255); 
-  hair(characterx, charactery+35  );
+  fill(200, 250, 255);
+  hair(characterx, charactery + 35);
   pop();
 
   //mouth
   arc(characterx - 40, charactery + 45, 10, 10, PI, 0);
 
   //hair
-  hair(characterx, charactery); 
+  hair(characterx, charactery);
   hair(characterx - 20, charactery - 2);
   hair(characterx - 10, charactery - 1);
   hair(characterx - 30, charactery);
@@ -629,7 +628,6 @@ function characterHappy(characterx, charactery) {
   fill(0, 0, 0);
   ellipse(characterx - 50, charactery + 32, 7, 2);
   ellipse(characterx - 30, charactery + 32, 7, 2);
-  
 
   //mouth
   arc(characterx - 40, charactery + 45, 20, 20, 0, PI);
@@ -670,9 +668,9 @@ function characterStart(characterx, charactery) {
   //arms
   push();
   strokeWeight(10);
-  line(characterx -15, charactery + 65, characterx, charactery + 90);
+  line(characterx - 15, charactery + 65, characterx, charactery + 90);
   strokeWeight(10);
-  line(characterx - 65, charactery + 65, characterx - 80, charactery +40);
+  line(characterx - 65, charactery + 65, characterx - 80, charactery + 40);
   pop();
 
   //hands
@@ -762,7 +760,7 @@ function characterStart(characterx, charactery) {
   fill(111, 143, 200);
   rect(characterx - 65, charactery + 100, 50, 20);
   pop();
-  line(characterx -40, charactery + 100, characterx - 40, charactery + 120);
+  line(characterx - 40, charactery + 100, characterx - 40, charactery + 120);
   push();
   fill(200, 200, 200);
   ellipse(characterx - 55, charactery + 122, 30, 10);
