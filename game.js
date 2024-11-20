@@ -1,12 +1,12 @@
 let x = 200;
 let y = 200;
-let characterx = 200;
-let charactery = 100;
+let characterx = 300;
+let charactery = 200;
 let state = "start";
 let velocityY = 0.2;
 let acceleration = 0.2;
 
-function setup() { 
+function setup() {
   createCanvas(550, 600);
   background(255, 255, 255);
 }
@@ -14,53 +14,50 @@ function setup() {
 function startScreen() {
   background(255, 100, 100);
   textSize(50);
-  text(" KLICK TO START", 70, 200);   
+  text(" KLICK TO START", 70, 200);
 }
 
-function lostScreen() { 
+function lostScreen() {
   background(100, 100, 100);
+  characterSad(x + 100, y + 200);
   textSize(50);
   text("YOU LOST", 150, 220);
-textSize(30);
-  text("(KLICK TO TRY AGAIN)", 120,300);
+  textSize(30);
+  text("(KLICK TO TRY AGAIN)", 120, 250);
 }
 
 function wonScreen() {
   background(200, 2, 100);
   textSize(50);
-  text("YOU WON",150,220);
+  text("YOU WON", 150, 220);
   textSize(30);
-  text("(KLICK TO PLAY AGAIN)",100,250);
+  text("(KLICK TO PLAY AGAIN)", 100, 250);
 }
 
 function resetGame() {
-  characterx = 200;
+  characterx = 300;
   charactery = 100;
   velocityY = 0.2;
   acceleration = 0.2;
 }
 
-
-
 function gameScreen() {
   background(25, 14, 20);
   push();
   noStroke();
-  
+
   let starx = [];
   let stary = [];
   let starAlpha = [];
 
   for (let i = 0; i < 100; i++) {
-  
-  const x = Math.floor(Math.random() * width);
+    const x = Math.floor(Math.random() * width);
     const y = Math.floor(Math.random() * height);
     const alpha = Math.random();
 
     starx.push(x);
     stary.push(y);
     starAlpha.push(alpha);
-    
   }
 
   for (let index in starx) {
@@ -68,7 +65,6 @@ function gameScreen() {
     ellipse(starx[index], stary[index], 3);
     starAlpha[index] = starAlpha[index] + 0.05;
   }
- 
 
   // rooftop
   fill(200, 200, 200);
@@ -173,7 +169,7 @@ function gameScreen() {
   fill(150, 150, 150);
   ellipse(x + 305, y - 130, 20, 1);
   ellipse(x + 305, y - 122, 20, 1);
-  pop(); 
+  pop();
 
   //skyscraper 6
   fill(60, 18, 80);
@@ -206,7 +202,6 @@ function gameScreen() {
   charactery = charactery + velocityY;
   velocityY = velocityY + acceleration;
 
- 
   // controls the character
   if (keyIsDown(32) === true) {
     velocityY -= 0.5;
@@ -218,12 +213,12 @@ function gameScreen() {
 function character(characterx, charactery) {
   //umbrella body
   push();
-  fill(255, 255, 0);
+  fill(255, 255, 100);
   arc(characterx, charactery, 162, 145, PI, 0);
   pop();
 
   //umbrella arcs
-  fill(100, 200, 255);
+  fill(255, 255, 0);
   arc(characterx - 66.5, charactery, 27, 15, PI, 0);
   arc(characterx - 39.5, charactery, 27, 15, PI, 0);
   arc(characterx - 12.5, charactery, 27, 15, PI, 0);
@@ -345,6 +340,7 @@ function character(characterx, charactery) {
   hair(characterx, charactery);
   hair(characterx - 20, charactery - 2);
   hair(characterx - 10, charactery - 1);
+  hair(characterx - 30, charactery);
   push();
 
   translate(characterx + 10, charactery + 20);
@@ -358,21 +354,155 @@ function character(characterx, charactery) {
   pop();
 }
 
-function hair(characterx, charactery) {
+function characterSad(characterx, charactery) {
+  //umbrella body
+  push();
+  fill(255, 255, 100);
+  arc(characterx, charactery, 162, 145, PI, 0);
+  pop();
+
+  //umbrella arcs
+  fill(255, 255, 0);
+  arc(characterx - 66.5, charactery, 27, 15, PI, 0);
+  arc(characterx - 39.5, charactery, 27, 15, PI, 0);
+  arc(characterx - 12.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 14.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 41.5, charactery, 27, 15, PI, 0);
+  arc(characterx + 68, charactery, 27, 15, PI, 0);
+
+  //arms
+  push();
+  strokeWeight(10);
+  line(characterx - 15, charactery + 65, characterx, charactery + 90);
+  strokeWeight(10);
+  line(characterx - 65, charactery + 65, characterx - 80, charactery + 90);
+  pop();
+
+  //hands
+  push();
+  fill(240, 240, 215);
+  ellipse(characterx - 80, charactery + 92, 10, 10);
+  ellipse(characterx, charactery + 92, 10, 10);
+  pop();
+
+  //handle
+  push();
+  noFill();
+  strokeWeight(4);
+  line(characterx, charactery - 1, characterx, charactery + 90);
+  arc(characterx + 10, charactery + 90, 20, 20, 0, PI);
+  pop();
+
+  //top of the umbrella
+  push();
+  fill(0, 0, 0);
+  arc(characterx, charactery - 72, 10, 10, PI, 0);
+  pop();
+
+  // details
   beginShape();
-  vertex(characterx - 26, charactery + 1);
+  noFill();
+  vertex(characterx - 53, charactery - 4);
   bezierVertex(
-    characterx - 43,
-    charactery + 29,
-    characterx - 9,
-    charactery + 28,
-    characterx - 26,
-    charactery
+    characterx - 44,
+    charactery - 72,
+    characterx - 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
   );
   endShape();
+  beginShape();
+  noFill();
+  vertex(characterx + 55, charactery - 4);
+  bezierVertex(
+    characterx + 44,
+    charactery - 72,
+    characterx + 11,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  line(characterx + 1, charactery - 77, characterx + 1, charactery - 3);
+  beginShape();
+  noFill();
+  vertex(characterx + 28, charactery - 3);
+  bezierVertex(
+    characterx + 20,
+    charactery - 72,
+    characterx + 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+  beginShape();
+  noFill();
+  vertex(characterx - 26, charactery - 3);
+  bezierVertex(
+    characterx - 20,
+    charactery - 72,
+    characterx - 5,
+    charactery - 63,
+    characterx,
+    charactery - 78
+  );
+  endShape();
+
+  //head
   push();
-  translate(characterx - 40, charactery - 10);
+  fill(240, 240, 215);
+  ellipse(characterx - 40, charactery + 34, 50, 50);
+  pop();
+
+  //body
+  push();
+  fill(50, 50, 50);
+  rect(characterx - 65, charactery + 60, 50, 40);
+  pop();
+  push();
+  fill(111, 143, 200);
+  rect(characterx - 65, charactery + 100, 50, 20);
+  pop();
+  line(characterx - 40, charactery + 100, characterx - 40, charactery + 120);
+  push();
+  fill(200, 200, 200);
+  ellipse(characterx - 55, charactery + 122, 30, 10);
+  ellipse(characterx - 25, charactery + 122, 30, 10);
+  pop();
+
+  //eyes
+  fill(0, 0, 0);
+  ellipse(characterx - 50, charactery + 32, 5, 5);
+  ellipse(characterx - 30, charactery + 32, 5, 5);
+
+  //mouth
+  arc(characterx - 40, charactery + 45, 10, 10, PI, 0);
+
+  //hair
+  hair(characterx, charactery);
+  hair(characterx - 20, charactery - 2);
+  hair(characterx - 10, charactery - 1);
+  hair(characterx - 30, charactery);
+  push();
+
+  translate(characterx + 10, charactery + 20);
+  rotate(0.5);
+  hair(0, 0);
+  pop();
+  push();
+  translate(characterx - 46, charactery - 4);
   rotate(-0.5);
+  hair(0, 0);
+  pop();
+}
+
+function hair(x, y) {
+  beginShape();
+  vertex(x - 26, y + 1);
+  bezierVertex(x - 43, y + 29, x - 9, y + 28, x - 26, y);
+  endShape();
 }
 
 function draw() {
@@ -392,9 +522,9 @@ function draw() {
 function mouseClicked() {
   if (state === "start") {
     state = "game";
-  } else if ((state === "lost")) {
+  } else if (state === "lost") {
     state = "game";
-  } else if ((state === "won")) {
+  } else if (state === "won") {
     state = "game";
   }
 }
